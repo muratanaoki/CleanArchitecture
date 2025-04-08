@@ -1,7 +1,6 @@
 import 'reflect-metadata';
 import express from 'express';
 import cors from 'cors';
-import { Container } from 'typedi';
 import { config } from '../config';
 import { MongoDBConnection } from '../database/mongodb/connection';
 import todoRoutes from './routes/todoRoutes';
