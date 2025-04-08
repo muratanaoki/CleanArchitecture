@@ -1,12 +1,12 @@
 import { Service } from 'typedi';
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
 import { CreateTodoUseCase } from '../../application/useCases/todo/CreateTodoUseCase';
 import { GetTodoByIdUseCase } from '../../application/useCases/todo/GetTodoByIdUseCase';
 import { GetUserTodosUseCase } from '../../application/useCases/todo/GetUserTodosUseCase';
 import { UpdateTodoUseCase } from '../../application/useCases/todo/UpdateTodoUseCase';
 import { DeleteTodoUseCase } from '../../application/useCases/todo/DeleteTodoUseCase';
 import { CreateTodoDTO, UpdateTodoDTO } from '../../application/dtos/TodoDTO';
-import { UserId } from '../../domain/valueObjects/UserId';
+import { RequestWithUser } from '../types/express';
 
 @Service()
 export class TodoController {
@@ -18,7 +18,7 @@ export class TodoController {
     private deleteTodoUseCase: DeleteTodoUseCase
   ) {}
 
-  public async createTodo(req: Request, res: Response, next: NextFunction): Promise<void> {
+  public async createTodo(req: RequestWithUser, res: Response, next: NextFunction): Promise<void> {
     try {
       const userId = req.user?.id;
       
@@ -42,7 +42,7 @@ export class TodoController {
     }
   }
 
-  public async getTodoById(req: Request, res: Response, next: NextFunction): Promise<void> {
+  public async getTodoById(req: RequestWithUser, res: Response, next: NextFunction): Promise<void> {
     try {
       const userId = req.user?.id;
       
@@ -65,7 +65,7 @@ export class TodoController {
     }
   }
 
-  public async getUserTodos(req: Request, res: Response, next: NextFunction): Promise<void> {
+  public async getUserTodos(req: RequestWithUser, res: Response, next: NextFunction): Promise<void> {
     try {
       const userId = req.user?.id;
       
@@ -81,7 +81,7 @@ export class TodoController {
     }
   }
 
-  public async updateTodo(req: Request, res: Response, next: NextFunction): Promise<void> {
+  public async updateTodo(req: RequestWithUser, res: Response, next: NextFunction): Promise<void> {
     try {
       const userId = req.user?.id;
       
@@ -114,7 +114,7 @@ export class TodoController {
     }
   }
 
-  public async deleteTodo(req: Request, res: Response, next: NextFunction): Promise<void> {
+  public async deleteTodo(req: RequestWithUser, res: Response, next: NextFunction): Promise<void> {
     try {
       const userId = req.user?.id;
       
