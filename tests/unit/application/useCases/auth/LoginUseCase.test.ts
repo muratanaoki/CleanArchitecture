@@ -60,14 +60,13 @@ describe('LoginUseCase', () => {
     expect(mockUserRepository.findByEmail).toHaveBeenCalledWith(expect.any(Email));
     expect(mockUser.validatePassword).toHaveBeenCalledWith('Password123');
     expect(mockAuthService.generateToken).toHaveBeenCalledWith(mockUser);
-    expect(result).toEqual({
-      token: 'jwt-token',
-      user: expect.objectContaining({
-        id: userId.getValue(),
-        name: 'Test User',
-        email: 'test@example.com'
-      })
-    });
+    expect(result).toEqual(expect.objectContaining({
+      id: userId.getValue(),
+      name: 'Test User',
+      email: 'test@example.com',
+      role: 'USER',
+      token: 'jwt-token'
+    }));
   });
 
   it('should throw an error if user is not found', async () => {
