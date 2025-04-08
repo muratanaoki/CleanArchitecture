@@ -1,21 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
 import { Container } from 'typedi';
 import { JwtAuthService } from '../../auth/JwtAuthService';
-import { UserRepository } from '../../../application/ports/repositories/UserRepository';
 
-declare global {
-  namespace Express {
-    interface Request {
-      user?: {
-        id: string;
-        role: string;
-        isAdmin: boolean;
-      };
-    }
-  }
+interface RequestWithUser extends Request {
+  user?: {
+    id: string;
+    role: string;
+    isAdmin: boolean;
+  };
 }
 
-export const authMiddleware = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const authMiddleware = async (req: RequestWithUser, res: Response, next: NextFunction): Promise<void> => {
   try {
     const authHeader = req.headers.authorization;
     
@@ -46,7 +41,7 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
   }
 };
 
-export const adminMiddleware = (req: Request, res: Response, next: NextFunction): void => {
+export const adminMiddleware = (req: RequestWithUser, res: Response, next: NextFunction): void => {
   if (!req.user || !req.user.isAdmin) {
     res.status(403).json({ message: 'Admin access required' });
     return;
