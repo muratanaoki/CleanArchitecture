@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { Container } from 'typedi';
 import { UserController } from '../../../interfaces/controllers/UserController';
-import { authMiddleware, adminMiddleware } from '../middleware/authMiddleware';
+import { authMiddleware } from '../middleware/authMiddleware';
 
 const router = Router();
 const userController = Container.get(UserController);
