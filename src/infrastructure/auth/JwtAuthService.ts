@@ -13,14 +13,18 @@ export class JwtAuthService implements AuthService {
       role: user.getRole().getValue()
     };
 
-    return jwt.sign(payload, config.jwt.secret, {
-      expiresIn: config.jwt.expiresIn
-    });
+    return jwt.sign(
+      payload, 
+      config.jwt.secret as any, 
+      {
+        expiresIn: config.jwt.expiresIn
+      }
+    );
   }
 
   public async verifyToken(token: string): Promise<TokenPayload> {
     try {
-      const payload = jwt.verify(token, config.jwt.secret) as TokenPayload;
+      const payload = jwt.verify(token, config.jwt.secret as any) as TokenPayload;
       return payload;
     } catch (error) {
       throw new Error('Invalid token');
