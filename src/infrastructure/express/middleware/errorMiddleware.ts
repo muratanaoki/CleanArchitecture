@@ -36,7 +36,7 @@ export class ValidationError extends AppError {
   }
 }
 
-export const errorMiddleware = (err: Error, req: Request, res: Response, next: NextFunction): void => {
+export const errorMiddleware = (err: Error, req: Request, res: Response, _next: NextFunction): void => {
   console.error('Error:', err);
 
   if (err instanceof AppError) {
