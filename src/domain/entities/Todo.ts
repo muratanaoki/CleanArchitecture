@@ -1,6 +1,6 @@
 import { TodoId } from '../valueObjects/TodoId';
 import { UserId } from '../valueObjects/UserId';
-import { Priority, PriorityValue } from '../valueObjects/Priority';
+import { Priority } from '../valueObjects/Priority';
 import { Status, StatusValue } from '../valueObjects/Status';
 
 export interface TodoProps {

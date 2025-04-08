@@ -15,7 +15,7 @@ export class JwtAuthService implements AuthService {
 
     return jwt.sign(
       payload, 
-      config.jwt.secret as any, 
+      config.jwt.secret as string, 
       {
         expiresIn: config.jwt.expiresIn
       }
@@ -24,7 +24,7 @@ export class JwtAuthService implements AuthService {
 
   public async verifyToken(token: string): Promise<TokenPayload> {
     try {
-      const payload = jwt.verify(token, config.jwt.secret as any) as TokenPayload;
+      const payload = jwt.verify(token, config.jwt.secret as string) as TokenPayload;
       return payload;
     } catch (error) {
       throw new Error('Invalid token');
